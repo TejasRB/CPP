@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+class COMPLEX
+{
+private:
+    float real;
+    float imag;
+
+public:
+    COMPLEX()
+    { 
+        real = 0;
+        imag = 0;
+    }
+    COMPLEX(float r, float i)
+    { 
+        real = r;
+        imag = i;
+    }
+    COMPLEX(int r)
+    { 
+        real = r;
+        imag = 0;
+    }
+    COMPLEX ADD(COMPLEX C)
+    { 
+        COMPLEX res;
+        res.real = real + C.real;
+        res.imag = imag + C.imag;
+        return res;
+    }
+    COMPLEX ADD(int r)
+    { 
+        COMPLEX res;
+        res.real = real + r;
+        res.imag = imag;
+        return res;
+    }
+    void display()
+    { 
+        if (imag < 0)
+            cout << real << " - i" << abs(imag) << endl;
+        else
+            cout << real << " + i" << imag << endl;
+    }
+};
+int main()
+{
+    COMPLEX C1(4, 5);
+    COMPLEX C2(3, -2);
+    COMPLEX C3;
+    cout << "C1 = ";
+    C1.display();
+    cout << "C2 = ";
+    C2.display();
+    C3 = C1.ADD(C2); 
+    cout << "C1 + C2 = ";
+    C3.display();
+    C3 = C1.ADD(2); 
+    cout << "C1 + 2 = ";
+    C3.display();
+    return 0;
+}
