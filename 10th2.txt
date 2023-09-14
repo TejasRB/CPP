@@ -1,0 +1,41 @@
+#include <iostream>
+#include <algorithm>
+#include <fstream>
+#include <cstring>
+using namespace std;
+int main()
+{
+    // cout << "File code" << endl;
+    char line[20], st[20] , data[20] , nstr[20];
+    ofstream out2("sample.txt");
+    cout << "write the data: ";
+    gets(line);
+    out2 << line << endl;
+    ifstream in("sample.txt");
+    if (!in.is_open())
+    {
+        cout << "Error: Could not open input file." << endl;
+        return 1;
+    }
+
+    ofstream out("sample2.txt");
+    if (!out.is_open())
+    {
+        cout << "Error: Could not open output file." << endl;
+        return 1;
+    }
+
+    while (!in.getline(data , strlen(data)))
+    {
+        for(int i = strlen(data) - 1; i>= 0; i--){
+            cout << data[i];
+            out << data[i];
+        }
+        out << endl;
+    }
+    in.close();
+    // reverse(str.begin(), str.end() - 1);
+    // out << str << endl;
+    out.close();
+    return 0;
+}
