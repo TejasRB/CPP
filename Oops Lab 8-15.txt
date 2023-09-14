@@ -1,0 +1,820 @@
+8. Write a C++ program to overload the function Search() to search an integer key value and a 
+key value of type double.
+
+#include <iostream.h>
+#include <conio.h>
+
+int Search(int arr[], int n, int key) {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int Search(double arr[], int n, double key) {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void main() {
+    int arr1[] = { 1, 2, 3, 4, 5 };
+    double arr2[] = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+    int index1 = Search(arr1, 5, 4);
+    int index2 = Search(arr2, 5, 4.4);
+    cout << "Index of 4 in arr1 is: " << index1 << endl;
+    cout << "Index of 4.4 in arr2 is: " << index2 << endl;
+    getch();
+}
+
+
+
+
+
+
+
+
+9. Write a C++ program to find the following using Function Template
+ a) Successor value of any input of type integer, float, char and double.
+ b) Sum of all the elements of an array of integers or floats or doubles.
+#include <iostream.h>
+//using namespace std;
+
+template <class T>
+T successor(T x) {
+    return x + 1;
+}
+
+template <class X>
+X sum(X arr[], int size) {
+    X total = 0;
+    for (int i = 0; i < size; i++) {
+        total += arr[i];
+    }
+    return total;
+}
+
+int main() {
+    // Finding the successor value of any input
+    cout << "Successor of 5: " << successor(5) << endl;
+    cout << "Successor of 5.5: " << successor(5.5) << endl;
+    cout << "Successor of 'a': " << successor('a') << endl;
+
+    // Finding the sum of all the elements of an array
+    int int_arr[] = {1, 2, 3, 4, 5};
+    float float_arr[] = {1.5, 2.5, 3.5, 4.5, 5.5};
+    double double_arr[] = {1.0, 2.0, 3.0, 4.0, 5.0};
+    int int_arr_size = sizeof(int_arr) / sizeof(int);
+    int float_arr_size = sizeof(float_arr) / sizeof(float);
+    int double_arr_size = sizeof(double_arr) / sizeof(double);
+
+    cout << "Sum of int array: " << sum(int_arr, int_arr_size) << endl;
+    cout << "Sum of float array: " << sum(float_arr, float_arr_size) << endl;
+    cout << "Sum of double array: " << sum(double_arr, double_arr_size) << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+10. Write a C++ Program to create a class as COMPLEX and implement the following by 
+overloading the function ADD() which returns the Complex numbers
+ a) ADD(C1, C2); C1 is an integer ; C2 is a Complex number.
+ b) ADD(C1, C2); C1 and C2 are Complex numbers
+#include <iostream.h>
+//using namespace std;
+
+class COMPLEX {
+   private:
+    float real, imag;
+
+   public:
+    COMPLEX() {
+        real = 0;
+        imag = 0;
+    }
+
+    COMPLEX(float r, float i) {
+        real = r;
+        imag = i;
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+
+    COMPLEX ADD(int num, COMPLEX c) {
+        COMPLEX result;
+        result.real = num + c.real;
+        result.imag = c.imag;
+        return result;
+    }
+
+    COMPLEX ADD(COMPLEX c1, COMPLEX c2) {
+        COMPLEX result;
+        result.real = c1.real + c2.real;
+        result.imag = c1.imag + c2.imag;
+        return result;
+    }
+};
+
+int main() {
+    COMPLEX c1(2, 3), c2(4, 5), c3;
+    c3 = c1.ADD(5, c2);
+    cout << "Result of ADD(int num, COMPLEX c): ";
+    c3.display();
+
+    c3 = c1.ADD(c2, c1);
+    cout << "Result of ADD(COMPLEX c1, COMPLEX c2): ";
+    c3.display();
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+11. Write a C++ Program to create a class called DATE. Accept two valid dates in the form of 
+DD/MM/YYYY. Implement the following by overloading the operators – (minus) and + (Plus). 
+Display the results by overloading the operator << after every operation.
+a) No_of _days = D1-D2 
+b) D1=D1 + No_of _days 
+ where d1 and d2 are date objects, d1>d2 and No_of_days is an integer
+#include<iostream.h>
+#include<conio.h>
+#include<process.h>
+class date
+{
+int flag,dd,mm,yy;
+public:
+date(int d,int m,int y)
+{
+dd=d;mm=m;yy=y;
+if((y%4)==0)
+flag=1;
+else
+{
+flag=0;
+if(m==2 && d>28)
+{
+cout<<"Error since not a leap year";
+getch();
+exit(0);
+}
+}
+}
+int return_date(date d);
+int operator -(date d2);
+date operator +(int n);
+friend ostream& operator <<(ostream& out,date d1);
+};
+int a[20]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+int b[20]={0,31,29,31,30,31,30,31,31,30,31,30,31};
+int date::operator -(date d2)
+{
+int a1,a2,x=0;
+date d1(dd,mm,yy);
+if(d1.dd==d2.dd&&d1.mm==d2.mm&&d1.yy==d2.yy)
+return x;
+if(d1.dd<d2.dd&&d1.mm==d2.mm&&d1.yy==d2.yy)
+{
+cout<<"Error since 2nd date is greater than 1st date";
+getch();
+exit(0);
+}
+if(d1.mm<d2.mm&&d1.yy==d2.yy)
+{
+cout<<"Error since 2nd date is greater than 1st date";
+getch();
+exit(0);
+ }
+ if(d1.yy<d2.yy)
+ {
+cout<<"Error since 2nd date is greater than 1st date";
+getch();
+exit(0);
+ }
+ a1=return_date(d1);
+ a2=return_date(d2);
+ for(int i=d1.yy-1;i>d2.yy;i--)
+ {
+if(i%yy==0)
+x=x+366;
+else
+x=x+365;
+}
+if(d1.yy==d2.yy)
+x=x+a1-a2;
+else
+{
+x=x+a1;
+if(d2.yy%4==0)
+x=x+(366-a2);
+else
+x=x+(365-a2);
+}
+return x;
+}
+int date::return_date(date d)
+{
+int int_val=d.dd;
+if((d.flag==1)&&(d.mm>2))
+{
+for(int i=0;i<d.mm;i++)
+int_val=int_val+a[i];
+int_val++;
+}
+else
+{
+for(int i=0;i<d.mm;i++)
+int_val=int_val+a[i];
+}
+return int_val;
+}
+date date::operator +(int n)
+{
+date d(dd,mm,yy);
+for(int i=0;i<n;i++)
+{
+d.dd++;
+if(d.yy%4==0)
+{
+d.flag=1;
+if(d.dd>b[d.mm])
+{
+d.dd=1;
+d.mm++;
+}
+}
+else
+{
+d.flag=0;
+if(d.dd>a[d.mm])
+{
+d.dd=1;
+d.mm++;
+}
+}
+if(d.mm>12)
+{
+d.mm=1;
+d.yy++;
+}
+}
+return d;
+}
+ostream& operator <<(ostream& out,date d1)
+{
+out << d1.dd<<"-"<<d1.mm<<"-"<<d1.yy;
+return out;
+}
+int main()
+{
+int d,m,y,no_of_days;
+clrscr();
+cout<<"Enter a valid date(dd mm yyyy):\n";
+cin>>d>>m>>y;
+if(d>b[m]||m>12)
+{
+cout<<"Error";
+getch();
+exit(0);
+}
+date d1(d,m,y);
+cout<<"Enter a valid date which is lesser than the first date\n";
+cin>>d>>m>>y;
+if(d>b[m]||m>12)
+{
+cout<<"Error";
+getch();
+exit(0);
+}
+date d2(d,m,y);
+no_of_days=d1-d2;
+cout<<"Difference b/w two dates is:\n"<<no_of_days<<endl;
+cout<<"Enter a no of days to be added to first date:\n";
+cin>>no_of_days;
+d1=d1+no_of_days;
+cout<<"The new date is:"<<d1<<endl;
+getch();
+return 0;
+}
+
+
+
+
+
+
+12.Write a C++ program to create a class called MATRIX using a two dimensional array of integers.Implement the following operations by overloading the operator == which checks the compatibility of the two matrices to be added and subtracted. Perform the addition and subtraction by overloading the operators + and - respectively. Display the results by overloading operator <<.
+if(m1==m2) 
+{
+
+}
+else
+   Display error
+Where m1, m2, m3 and m4 are MATRIX objects
+
+#include<iostream.h>
+#include<conio.h>
+class matrix
+{
+  private:long m[5][5];
+  int row;int col;
+  public:void getdata();
+  int operator ==(matrix);
+  matrix operator+(matrix);
+  matrix operator-(matrix);
+  friend ostream & operator << (ostream &,matrix &);
+};
+/* function to check whether the order of matrix are same or not */
+int matrix::operator==(matrix cm)
+{
+  if(row==cm.row && col==cm.col)
+  {
+    return 1;
+  }
+  return 0;
+}
+/* function to read data for matrix*/
+void matrix::getdata()
+{
+  cout<<"enter the number of rows\n";
+  cin>>row;
+  cout<<"enter the number of columns\n";
+  cin>>col;
+  cout<<"enter the elements of the matrix\n";
+  for(int i=0;i<row;i++)
+  {
+    for(int j=0;j<col;j++)
+    {
+       cin>>m[i][j];
+    }
+  }
+}
+/* function to add two matrix */
+matrix matrix::operator+(matrix am)
+{
+  matrix temp;
+  for(int i=0;i<row;i++)
+  {
+    for(int j=0;j<col;j++)
+    {
+      temp.m[i][j]=m[i][j]+am.m[i][j];
+    }
+    temp.row=row;
+    temp.col=col;
+  }
+  return temp;
+}
+/* function to subtract two matrix */
+matrix matrix::operator-(matrix sm)
+{
+  matrix temp;
+  for(int i=0;i<row;i++)
+  {
+    for(int j=0;j<col;j++)
+    {
+      temp.m[i][j]=m[i][j]-sm.m[i][j];
+    }
+    temp.row=row;
+    temp.col=col;
+  }
+  return temp;
+}
+/* function to display the contents of the matrix */
+ostream & operator <<(ostream &fout,matrix &d)
+{
+  for(int i=0;i<d.col;i++)
+  {
+    for(int j=0;j<d.col;j++)
+    {
+      fout<<d.m[i][j];
+      cout<<" ";
+    }
+    cout<<endl;
+  }
+return fout;
+}
+/* main function */
+void main()
+{
+  matrix m1,m2,m3,m4;
+  clrscr();
+  m1.getdata();
+  m2.getdata();
+  if(m1==m2)
+  {
+    m3=m1+m2;
+    m4=m1-m2;
+    cout<<"Addition of matrices\n";
+    cout<<"the result is\n";
+    cout<<m3;
+    cout<<"subtraction of matrices\n";
+    cout<<"The result is \n";
+    cout<<m4;
+  }
+  else
+  {
+    cout<<"order of the input matrices is not identical\n";
+  }
+  getch();
+}
+
+
+
+
+
+
+
+
+
+13. Write a C++ Program to create a base class called STUDENT with data members 
+USN, Name and Age. Using inheritance, create classes UG_STUDENT and 
+PG_STUDENT having fields as Semester, Fees and Stipend. Enter the data for at least 
+5 students. Find the average age, semester wise, for all UG and PG students.
+
+#include <iostream.h>
+#include <conio.h>
+
+
+class STUDENT {
+public:
+    char USN[10];
+    char Name[20];
+    int Age;
+};
+
+class UG_STUDENT : public STUDENT {
+public:
+    int Semester;
+    float Fees;
+    float Stipend;
+};
+
+class PG_STUDENT : public STUDENT {
+public:
+    int Semester;
+    float Fees;
+    float Stipend;
+};
+
+void main() {
+    clrscr();
+
+    UG_STUDENT ug_students[5];
+    PG_STUDENT pg_students[5];
+
+    // Enter data for UG students
+    for (int i = 0; i < 5; i++) {
+        cout << "Enter USN for UG student " << i+1 << ": ";
+        cin >> ug_students[i].USN;
+        cout << "Enter name for UG student " << i+1 << ": ";
+        cin >> ug_students[i].Name;
+        cout << "Enter age for UG student " << i+1 << ": ";
+        cin >> ug_students[i].Age;
+        cout << "Enter semester for UG student " << i+1 << ": ";
+        cin >> ug_students[i].Semester;
+        cout << "Enter fees for UG student " << i+1 << ": ";
+        cin >> ug_students[i].Fees;
+        cout << "Enter stipend for UG student " << i+1 << ": ";
+        cin >> ug_students[i].Stipend;
+    }
+
+    // Enter data for PG students
+    for ( i = 0; i < 5; i++) {
+        cout << "Enter USN for PG student " << i+1 << ": ";
+        cin >> pg_students[i].USN;
+        cout << "Enter name for PG student " << i+1 << ": ";
+        cin >> pg_students[i].Name;
+        cout << "Enter age for PG student " << i+1 << ": ";
+        cin >> pg_students[i].Age;
+        cout << "Enter semester for PG student " << i+1 << ": ";
+        cin >> pg_students[i].Semester;
+        cout << "Enter fees for PG student " << i+1 << ": ";
+        cin >> pg_students[i].Fees;
+        cout << "Enter stipend for PG student " << i+1 << ": ";
+        cin >> pg_students[i].Stipend;
+    }
+
+    // Calculate average age for UG students
+    int total_age_ug = 0;
+    for ( i = 0; i < 5; i++) {
+        total_age_ug += ug_students[i].Age;
+    }
+    float avg_age_ug = total_age_ug / 5.0;
+    cout << "Average age for UG students: " << avg_age_ug << endl;
+
+    // Calculate average age for PG students
+    int total_age_pg = 0;
+    for ( i = 0; i < 5; i++) {
+        total_age_pg += pg_students[i].Age;
+    }
+    float avg_age_pg = total_age_pg / 5.0;
+    cout << "Average age for PG students: " << avg_age_pg << endl;
+
+    // Calculate average age per semester for UG students
+    for ( i = 1; i <= 8; i++) {
+        int total_age = 0;
+        int count = 0;
+        for (int j = 0; j < 5; j++) {
+            if (ug_students[j].Semester == i)
+        {
+            total_age += ug_students[j].Age;
+            count++;
+        }
+    }
+    if (count > 0) {
+        float avg_age = total_age / (float) count;
+        cout << "Average age for UG students in Semester " << i << ": " << avg_age << endl;
+    }
+}
+
+// Calculate average age per semester for PG students
+for ( i = 1; i <= 4; i++) {
+    int total_age = 0;
+    int count = 0;
+    for (int j = 0; j < 5; j++) {
+        if (pg_students[j].Semester == i) {
+            total_age += pg_students[j].Age;
+            count++;
+        }
+    }
+    if (count > 0) {
+        float avg_age = total_age / (float)count;
+        cout << "Average age for PG students in Semester " << i << ": " << avg_age << endl;
+    }
+}
+
+getch();
+}
+
+
+                                                OR
+
+
+
+#include<iostream.h> 
+#include<conio.h> 
+class student 
+{ 
+ public:  int reg,age; 
+            char name[20]; 
+            void read_data(); 
+}; 
+
+class ugstudent:public student 
+{ 
+ public:  int stipend,sem; 
+            float fees; 
+           void read_data(); 
+}; 
+
+
+class pgstudent:public student 
+{ 
+ public:  int stipend,sem; 
+            float fees; 
+           void read_data(); 
+}; 
+
+/* function to read student details*/ 
+void student::read_data() 
+{ 
+ cout<<"\n Enter name:"; 
+ cin>>name; 
+ cout<<"\n Enter Reg.no."; 
+ cin>>reg; 
+ cout<<"\n Enter age:"; 
+ cin>>age;  
+ }
+void ugstudent::read_data() 
+{ 
+ student::read_data(); 
+ cout<<"\nEnter the sem:"; 
+ cin>>sem; 
+ cout<<"\nEnter the fees:"; 
+ cin>>fees; 
+ cout<<"\nEnter the stipend:"; 
+ cin>>stipend; 
+} 
+
+/* function to read additional details for pgstudents*/ 
+void pgstudent::read_data() 
+{ 
+ student::read_data(); 
+ cout<<"\nEnter the sem:"; 
+ cin>>sem; 
+ cout<<"\nEnter the fees:"; 
+ cin>>fees; 
+ cout<<"\nEnter the stipend:"; 
+ cin>>stipend; 
+} 
+
+/* main function */ 
+void main() 
+{ 
+ ugstudent ug[20]; 
+ pgstudent pg[20]; 
+ int i,n,m; 
+ float average; clrscr(); 
+ cout<<"\nEnter the no. of entries in the ugstudent class:"; 
+ cin>>n; 
+ for(i=1;i<=n;i++) 
+ ug[i].read_data(); 
+ for(int sem=1;sem<=8;sem++) 
+ { 
+ float sum=0; 
+ int found=0,count=0; 
+ for(i=1;i<=n;i++) 
+ { 
+ if(ug[i].sem==sem) 
+ { 
+ sum=sum+ug[i].age; 
+ found=1;
+   count++; 
+ } 
+ } 
+ if(found==1) 
+ { 
+ average=sum/count; 
+ cout<<"\nAverage of age of sem "<<sem<<" is "<<average; 
+
+ } 
+ } 
+ cout<<"\nEnter the no. of entries of pgstudent class:"; 
+ cin>>n; 
+ for(i=1;i<=n;i++) 
+ pg[i].read_data(); 
+ for(sem=1;sem<=8;sem++) 
+ { 
+ float sum=0; 
+ int found=0,count=0; 
+ for(i=1;i<=n;i++) 
+ { 
+ if(pg[i].sem==sem) 
+ { 
+ sum=sum+pg[i].age; 
+ found=1; 
+ count++; 
+ } 
+ } 
+ if(found==1) 
+ { 
+ average=sum/count; 
+ cout<<"\nAverage of age of sem "<<sem<<" is "<<average; 
+ } 
+ } 
+ getch(); 
+} 
+
+
+
+
+
+
+
+
+14. Write a C++ program to create a base class Student, from this inherit a new class called
+Exams, containing Marks1, Marks2 and Marks3 as its data Members. Also create another class 
+called Sports having Sports_gradeas its data member. Now, create yet another class but a derived 
+class of Exams and Sports classes and call it as Awards. Use appropriate member functions in all 
+classes. You can use the Regno, Name, Semester and Branch as the members of the base class.
+
+#include <iostream.h>
+#include <conio.h>
+//#include <cstring>
+//using namespace std;
+
+class Student {
+    public:
+        int Regno;
+        char Name[20];
+        int Semester;
+        char Branch[20];
+        void GetData() {
+            cout << "Enter Regno: ";
+            cin >> Regno;
+            cout << "Enter Name: ";
+            cin >> Name;
+            cout << "Enter Semester: ";
+            cin >> Semester;
+            cout << "Enter Branch: ";
+            cin >> Branch;
+        }
+};
+
+class Exams : public virtual Student { 
+    public:
+        int Marks1;
+        int Marks2;
+        int Marks3;
+        void GetMarks() {
+            cout << "Enter Marks1: ";
+            cin >> Marks1;
+            cout << "Enter Marks2: ";
+            cin >> Marks2;
+            cout << "Enter Marks3: ";
+            cin >> Marks3;
+        }
+};
+
+class Sports : public virtual Student {
+    public:
+        char Sports_grade;
+        void GetSports() {
+            cout << "Enter Sports Grade: ";
+            cin >> Sports_grade;
+        }
+};
+
+class Awards : public Exams, public Sports {
+    public:
+        void Display() {
+            cout << "Name: " << Student::Name << endl;
+            cout << "Regno: " << Student::Regno << endl;
+            cout << "Branch: " << Student::Branch << endl;
+            cout << "Exams Semester: " << Exams::Semester << endl;
+            cout << "Marks1: " << Marks1 << endl;
+            cout << "Marks2: " << Marks2 << endl;
+            cout << "Marks3: " << Marks3 << endl;
+            cout << "Sports Semester: " << Sports::Semester << endl;
+            cout << "Sports Grade: " << Sports_grade << endl;
+        }
+};
+
+int main() {
+    Awards a1;
+    a1.GetData();
+    a1.GetMarks();
+    a1.GetSports();
+    a1.Display();
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+15. Write a C++ program to create a file called File1.txt and prints its contents in the reverse 
+order to the File2.txt.
+#include <iostream.h>
+#include <fstream.h>
+#include <string.h>
+#include <conio.h>
+
+void main() {
+    // Open the input file for reading
+    ifstream inputFile("File1.txt");
+    if (!inputFile) {
+        cerr << "Error: Unable to open input file" << endl;
+        return;
+    }
+
+    // Open the output file for writing
+    ofstream outputFile("File2.txt");
+    if (!outputFile) {
+        cerr << "Error: Unable to open output file" << endl;
+        return;
+    }
+
+    // Read each line of the input file and write it to the output file in reverse order
+    char line[256];
+    while (inputFile.getline(line, 256)) {
+        for (int i = strlen(line) - 1; i >= 0; i--) {
+            outputFile << line[i];
+        }
+        outputFile << endl;
+    }
+
+    // Close the input and output files
+    inputFile.close();
+    outputFile.close();
+
+    cout << "File contents reversed and written to File2.txt" << endl;
+
+    getch(); // Wait for user input before exiting
+}
+

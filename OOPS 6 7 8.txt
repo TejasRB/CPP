@@ -1,0 +1,143 @@
+6.Create two classes D1 and D2 which store the value of distances. D1 stores distances in meters 
+and centimeters and D2 in feet and inches. Write a program to add objects of two classes D1 
+and D2 and the display the results in feet and inches using friend function.
+
+#include <iostream.h>
+//using namespace std;
+
+class D2;  // forward declaration
+
+class D1 {
+    private:
+        int meters;
+        int centimeters;
+
+    public:
+    void get_data()
+        {
+            cout<<"Enter distance in meters and centimeters: ";
+            cin>>meters>>centimeters;
+        }
+        friend void add(D1 obj1, D2 obj2);
+};
+
+class D2 {
+    private:
+        int feet;
+        int inches;
+
+    public:
+    void get_data()
+        {
+            cout<<"Enter distance in feet and inches: ";
+            cin>>feet>>inches;
+        }
+        friend void add(D1 obj1, D2 obj2);
+};
+
+void add(D1 obj1, D2 obj2) {
+    // Convert D1 to inches
+    int d1_inches = obj1.meters * 39.37 + obj1.centimeters * 0.3937;
+
+    // Add D1 and D2 in inches
+    int total_inches = d1_inches + obj2.feet * 12 + obj2.inches;
+
+    // Convert total inches to feet and inches
+    int feet = total_inches / 12;
+    int inches = total_inches % 12;
+
+    // Display the result in feet and inches
+    cout << "Total distance: " << feet << " feet, " << inches << " inches" << endl;
+}
+
+int main() {
+    
+    D1 d1;
+    D2 d2;
+    d1.get_data();
+    d2.get_data();
+    // Add the two objects and display the result
+    add(d1, d2);
+    return 0;
+}
+
+
+7.Given that an EMPLOYEE class contains the data members like E_Number, E_Name, Basic_salary, DA, HRA, Net_salary 
+and the member functions like Read(), Calculate_Net_Sal(), and Display(). Write a C++ Program to read the data 
+of N Employees and Compute the Net_Salary of each employee.
+
+#include <iostream.h>
+//using namespace std;
+class employee
+{
+    int   emp_number;
+    char  emp_name[20];
+    float emp_basic;
+    float emp_da;
+    float emp_hra;
+    float emp_net_sal;
+
+public:
+    void read();
+    float calculate_net_salary();
+    void display();
+};
+
+void employee :: read()
+{
+    cout << "\nEnter employee number: ";
+    cin >> emp_number;
+    cout << "\nEnter employee name: ";
+    cin >> emp_name;
+    cout << "\nEnter employee basic: ";
+    cin >> emp_basic;
+    cout << "\nEnter employee DA: ";
+    cin >> emp_da;
+    cout << "\nEnter employee HRA: ";
+    cin >> emp_hra;
+}
+
+float employee :: calculate_net_salary()
+{
+    emp_net_sal = emp_basic + emp_da + emp_hra;
+    return emp_net_sal;
+}
+
+void employee :: display()
+{
+    cout << "\n\n**** Details of  Employee ****";
+    cout << "\nEmployee Name      :  " << emp_name;
+    cout << "\nEmployee number    :  " << emp_number;
+    cout << "\nBasic salary       :  " << emp_basic;
+    cout << "\nEmployee DA        :  " << emp_da;
+    cout << "\nEmployee HRA       :  " << emp_hra;
+    cout << "\nNet Salary         :  " << emp_net_sal;
+    cout << "\n-------------------------------\n\n";
+}
+
+int main()
+{
+    int num_employees;
+    int i;
+    cout << "How many employees do you want to enter? ";
+    cin >> num_employees;
+    //employee* emp = new employee[num_employees];
+   employee emp[num_employees];
+ 
+    for ( i = 0; i < num_employees; i++)
+    {
+        emp[i].read();
+        emp[i].calculate_net_salary();
+    }
+
+    for ( i = 0; i < num_employees; i++)
+    {
+        emp[i].display();
+    }
+//delete[] emp;
+    return 0;
+}
+
+
+
+
